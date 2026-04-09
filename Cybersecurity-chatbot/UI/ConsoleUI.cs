@@ -51,10 +51,7 @@ namespace Cybersecurity_chatbot.UI
         }
 
         // ─── ASCII Art ───────────────────────────────────────────────────────────
-
-        /// <summary>
-        /// Displays a shield and lock themed ASCII art header.
-        /// </summary>
+ 
         private void DisplayAsciiArt()
         {
             Console.Clear();
