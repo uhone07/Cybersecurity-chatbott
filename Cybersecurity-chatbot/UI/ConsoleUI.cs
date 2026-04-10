@@ -5,10 +5,7 @@ using CybersecurityChatbot.Chat;
 
 namespace Cybersecurity_chatbot.UI
 {
-    /// <summary>
-    /// Manages all console display elements: ASCII art, colours, typing effects,
-    /// borders, and the main conversation loop.
-    /// </summary>
+    
     public class ConsoleUI
     {
         // ─── Colour Scheme ───────────────────────────────────────────────────────
@@ -30,12 +27,11 @@ namespace Cybersecurity_chatbot.UI
             _audioPlayer = new AudioPlayer();
         }
 
-        // ─── Application Entry ───────────────────────────────────────────────────
 
-        /// <summary>
+        
         /// Starts the chatbot: plays greeting audio, shows ASCII art,
         /// greets user, then enters the main conversation loop.
-        /// </summary>
+       
         public void Start()
         {
             Console.Title = "Cybersecurity Awareness Chatbot";
@@ -49,8 +45,6 @@ namespace Cybersecurity_chatbot.UI
             DisplayHelp();
             RunConversationLoop();
         }
-
-        // ─── ASCII Art ───────────────────────────────────────────────────────────
 
         private void DisplayAsciiArt()
         {
@@ -121,11 +115,11 @@ namespace Cybersecurity_chatbot.UI
             Thread.Sleep(600);
         }
 
-        // ─── Welcome Banner ──────────────────────────────────────────────────────
+        
 
-        /// <summary>
+       
         /// Prints the initial welcome message after ASCII art is shown.
-        /// </summary>
+        
         private void DisplayWelcomeBanner()
         {
             Console.WriteLine();
@@ -137,11 +131,11 @@ namespace Cybersecurity_chatbot.UI
             Thread.Sleep(300);
         }
 
-        // ─── User Name ───────────────────────────────────────────────────────────
+     
 
-        /// <summary>
+        
         /// Prompts the user for their name and validates it is not empty.
-        /// </summary>
+        
         private void AskForUserName()
         {
             PrintBorder('-', 70);
@@ -165,11 +159,11 @@ namespace Cybersecurity_chatbot.UI
             Console.WriteLine();
         }
 
-        // ─── Help Menu ───────────────────────────────────────────────────────────
+       
 
-        /// <summary>
+       
         /// Displays the list of available topics.
-        /// </summary>
+       
         private void DisplayHelp()
         {
             PrintColored("  [INTEL DATABASE] — Topics available for briefing:\n\n", ACCENT_COLOR);
@@ -195,11 +189,11 @@ namespace Cybersecurity_chatbot.UI
             Console.WriteLine();
         }
 
-        // ─── Main Loop ───────────────────────────────────────────────────────────
+        
 
-        /// <summary>
+        
         /// Runs the main conversation loop until the user exits.
-        /// </summary>
+       
         private void RunConversationLoop()
         {
             while (true)
@@ -226,11 +220,10 @@ namespace Cybersecurity_chatbot.UI
             }
         }
 
-        // ─── Helpers ─────────────────────────────────────────────────────────────
-
-        /// <summary>
+       
+       
         /// Displays the input prompt and reads user input.
-        /// </summary>
+        
         private string PromptUser()
         {
             PrintColored($"  [Agent {_userName}] >> ", USER_COLOR);
@@ -240,9 +233,8 @@ namespace Cybersecurity_chatbot.UI
             return input;
         }
 
-        /// <summary>
         /// Prints a bot message with a typing-style delay.
-        /// </summary>
+       
         private void BotSay(string message)
         {
             PrintColored("  [CyberBot] >> ", BOT_COLOR);
@@ -250,9 +242,9 @@ namespace Cybersecurity_chatbot.UI
             Console.WriteLine();
         }
 
-        /// <summary>
+        
         /// Prints text character-by-character to simulate a typing effect.
-        /// </summary>
+        
         private static void TypeLine(string text, ConsoleColor color, int delayMs = 20)
         {
             Console.ForegroundColor = color;
@@ -265,9 +257,9 @@ namespace Cybersecurity_chatbot.UI
             Console.WriteLine();
         }
 
-        /// <summary>
+        
         /// Prints coloured text without a typing delay.
-        /// </summary>
+       
         private static void PrintColored(string text, ConsoleColor color)
         {
             Console.ForegroundColor = color;
@@ -275,9 +267,9 @@ namespace Cybersecurity_chatbot.UI
             Console.ResetColor();
         }
 
-        /// <summary>
+        
         /// Prints a horizontal border line.
-        /// </summary>
+      
         private static void PrintBorder(char borderChar, int width)
         {
             Console.ForegroundColor = BORDER_COLOR;
@@ -285,18 +277,18 @@ namespace Cybersecurity_chatbot.UI
             Console.ResetColor();
         }
 
-        /// <summary>
+       
         /// Returns true if the user typed an exit command.
-        /// </summary>
+        
         private static bool IsExitCommand(string input)
         {
             string lower = input.Trim().ToLower();
             return lower == "exit" || lower == "quit" || lower == "bye";
         }
 
-        /// <summary>
+
         /// Displays a farewell message before closing.
-        /// </summary>
+       
         private void Farewell()
         {
             Console.WriteLine();
