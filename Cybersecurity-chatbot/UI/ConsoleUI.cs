@@ -51,7 +51,7 @@ namespace Cybersecurity_chatbot.UI
         }
 
         // ─── ASCII Art ───────────────────────────────────────────────────────────
- 
+
         private void DisplayAsciiArt()
         {
             Console.Clear();
