@@ -3,19 +3,18 @@ using System.Collections.Generic;
 
 namespace CybersecurityChatbot.Chat
 {
-    /// <summary>
+    
     /// Core chatbot logic. Stores the user's name, manages keyword-based
     /// responses, and handles invalid/unrecognised input gracefully.
-    /// </summary>
+   
     public class ChatBot
     {
         private string _userName = "User";
 
-        // ─── Response Dictionary ─────────────────────────────────────────────────
+      
 
-        /// <summary>
         /// Maps cybersecurity keywords to educational responses.
-        /// </summary>
+      
         private readonly Dictionary<string, string> _keywordResponses
             = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
@@ -149,19 +148,17 @@ namespace CybersecurityChatbot.Chat
             }
         };
 
-        // ─── Public Methods ───────────────────────────────────────────────────────
-
-        /// <summary>
+        
         /// Sets the user's name for personalised responses.
-        /// </summary>
+       
         public void SetUserName(string name)
         {
             _userName = name;
         }
 
-        /// <summary>
+      
         /// Analyses user input, matches keywords, and returns a response.
-        /// </summary>
+       
         public string GetResponse(string userInput)
         {
             if (string.IsNullOrWhiteSpace(userInput))
@@ -194,11 +191,11 @@ namespace CybersecurityChatbot.Chat
             return GetDefaultResponse();
         }
 
-        // ─── Private Helpers ─────────────────────────────────────────────────────
+        
 
-        /// <summary>
+        
         /// Returns a randomised default message for unrecognised input.
-        /// </summary>
+       
         private string GetDefaultResponse()
         {
             string[] defaults = {
