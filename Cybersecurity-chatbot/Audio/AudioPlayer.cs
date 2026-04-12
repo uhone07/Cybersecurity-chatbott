@@ -4,20 +4,12 @@ using System.Threading;
 
 namespace CybersecurityChatbot.Audio
 {
-    /// <summary>
-    /// Handles playback of the WAV voice greeting on application launch.
-    /// Uses reflection to avoid a compile-time dependency on System.Windows.Extensions
-    /// (which contains System.Media.SoundPlayer on netcore/net5+). Falls back to a
-    /// MinimalAudioPlayer when SoundPlayer is not available at runtime.
-    /// </summary>
+   
     public class AudioPlayer
     {
         private const string WAV_FILE_NAME = "greeting.wav";
 
-        /// <summary>
-        /// Attempts to play the WAV greeting file.
-        /// Degrades gracefully with a console message if the file is missing.
-        /// </summary>
+        
         public void PlayGreeting()
         {
             try
@@ -30,9 +22,7 @@ namespace CybersecurityChatbot.Audio
                     return;
                 }
 
-                // Try to use System.Media.SoundPlayer via reflection so we don't need
-                // a compile-time reference to System.Windows.Extensions.
-                // Type name and assembly based on the diagnostic message.
+                
                 try
                 {
                     var spType = Type.GetType("System.Media.SoundPlayer, System.Windows.Extensions");
