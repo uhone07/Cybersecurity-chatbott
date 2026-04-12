@@ -133,13 +133,13 @@ namespace CybersecurityChatbot.Audio
                     }
                     catch
                     {
-                        // Some platforms (e.g., non-Windows) may throw; ignore.
+                       
                     }
                 });
             }
             catch
             {
-                // If even queuing fails, ignore to avoid breaking startup.
+                
             }
         }
     }
