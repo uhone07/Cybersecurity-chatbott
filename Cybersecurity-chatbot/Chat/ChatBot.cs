@@ -5,8 +5,7 @@ namespace CybersecurityChatbot.Chat
 {
     
     /// Core chatbot logic. Stores the user's name, manages keyword-based
-    /// responses, and handles invalid/unrecognised input gracefully.
-   
+    
     public class ChatBot
     {
         private string _userName = "User";

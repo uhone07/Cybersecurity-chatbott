@@ -45,10 +45,10 @@ namespace CybersecurityChatbot.Audio
                 }
                 catch
                 {
-                    // Reflection failed — fall through to MinimalAudioPlayer fallback.
+                  
                 }
 
-                // Fallback: simple beep-based greeting that is safe across platforms.
+              
                 var minimal = new MinimalAudioPlayer();
                 minimal.PlayGreeting();
             }
@@ -60,11 +60,7 @@ namespace CybersecurityChatbot.Audio
             }
         }
 
-        // ─── Helpers ─────────────────────────────────────────────────────────────
-
-        /// <summary>
-        /// Resolves the full path to the WAV file.
-        /// </summary>
+       
         private static string GetWavPath()
         {
             string exeDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -74,9 +70,7 @@ namespace CybersecurityChatbot.Audio
             return Path.Combine(Directory.GetCurrentDirectory(), WAV_FILE_NAME);
         }
 
-        /// <summary>
-        /// Prints a friendly warning when the WAV file cannot be located.
-        /// </summary>
+       
         private static void PrintAudioWarning(string expectedPath)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -92,22 +86,14 @@ namespace CybersecurityChatbot.Audio
         }
     }
 
-    /// <summary>
-    /// Minimal AudioPlayer implementation to satisfy usages in ConsoleUI.
-    /// Provides a small greeting sound sequence. Non-fatal on platforms
-    /// that do not support Console.Beep.
-    /// </summary>
+
     public class MinimalAudioPlayer
     {
         public MinimalAudioPlayer()
         {
-            // Placeholder constructor for future expansion (e.g., audio device init).
+           
         }
 
-        /// <summary>
-        /// Plays a short greeting. Swallows exceptions so non-Windows platforms
-        /// or environments without a console sound device do not crash the app.
-        /// </summary>
         public void PlayGreeting()
         {
             try
