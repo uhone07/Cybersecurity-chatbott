@@ -1,8 +1,7 @@
 ﻿using System.Windows;
 
-namespace CybersecurityChatbot
+namespace CybersecurityChatbot;
+
+public partial class App : Application
 {
-    public partial class App : Application
-    {
-    }
 }
