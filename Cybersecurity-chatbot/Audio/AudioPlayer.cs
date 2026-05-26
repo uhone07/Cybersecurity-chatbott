@@ -1,121 +1,39 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
+using System.Media;
+using System.Windows;
 
 namespace CybersecurityChatbot.Audio
 {
-   
+    /// <summary>
+    /// Handles WAV audio playback for the voice greeting.
+    /// Compatible with both the Part 1 console app and the Part 2 WPF GUI.
+    /// </summary>
     public class AudioPlayer
     {
-        private const string WAV_FILE_NAME = "greeting.wav";
+        // Relative path from the output directory to the WAV file
+        private readonly string _greetingPath = Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory, "greeting.wav");
 
-        
+        /// <summary>
+        /// Plays the greeting WAV file asynchronously.
+        /// Silently skips if the file is not found (so the app still runs without it).
+        /// </summary>
         public void PlayGreeting()
         {
             try
             {
-                string wavPath = GetWavPath();
-
-                if (!File.Exists(wavPath))
+                if (File.Exists(_greetingPath))
                 {
-                    PrintAudioWarning(wavPath);
-                    return;
+                    using var player = new SoundPlayer(_greetingPath);
+                    player.Play(); // async — does not block the UI thread
                 }
-
-                
-                try
-                {
-                    var spType = Type.GetType("System.Media.SoundPlayer, System.Windows.Extensions");
-                    if (spType != null)
-                    {
-                        // Constructor SoundPlayer(string)
-                        var ctor = spType.GetConstructor(new[] { typeof(string) });
-                        if (ctor != null)
-                        {
-                            var player = ctor.Invoke(new object[] { wavPath });
-                            var playMethod = spType.GetMethod("Play", Type.EmptyTypes);
-                            playMethod?.Invoke(player, null);
-
-                            // Try to dispose if available (non-critical)
-                            var disposeMethod = spType.GetMethod("Dispose");
-                            disposeMethod?.Invoke(player, null);
-                            return;
-                        }
-                    }
-                }
-                catch
-                {
-                  
-                }
-
-              
-                var minimal = new MinimalAudioPlayer();
-                minimal.PlayGreeting();
+                // No warning shown if file is missing — the app works without audio
             }
             catch (Exception ex)
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine($"\n  [Audio] Could not play greeting: {ex.Message}");
-                Console.ResetColor();
-            }
-        }
-
-       
-        private static string GetWavPath()
-        {
-            string exeDir = AppDomain.CurrentDomain.BaseDirectory;
-            string exeDirPath = Path.Combine(exeDir, WAV_FILE_NAME);
-            if (File.Exists(exeDirPath)) return exeDirPath;
-
-            return Path.Combine(Directory.GetCurrentDirectory(), WAV_FILE_NAME);
-        }
-
-       
-        private static void PrintAudioWarning(string expectedPath)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine();
-            Console.WriteLine("  ─────────────────────────────────────────────────────");
-            Console.WriteLine("  [Audio Notice]");
-            Console.WriteLine($"  greeting.wav not found at: {expectedPath}");
-            Console.WriteLine("  Add your recorded WAV file to the project directory");
-            Console.WriteLine("  and set 'Copy to Output Directory' to 'Copy if newer'.");
-            Console.WriteLine("  ─────────────────────────────────────────────────────");
-            Console.ResetColor();
-            Console.WriteLine();
-        }
-    }
-
-
-    public class MinimalAudioPlayer
-    {
-        public MinimalAudioPlayer()
-        {
-           
-        }
-
-        public void PlayGreeting()
-        {
-            try
-            {
-                // Play a short, non-blocking beep sequence on a background thread.
-                ThreadPool.QueueUserWorkItem(_ =>
-                {
-                    try
-                    {
-                        Console.Beep(700, 120);
-                        Thread.Sleep(60);
-                        Console.Beep(900, 120);
-                    }
-                    catch
-                    {
-                       
-                    }
-                });
-            }
-            catch
-            {
-                
+                // Log to Debug output only; never crash the app over missing audio
+                System.Diagnostics.Debug.WriteLine($"[AudioPlayer] Could not play greeting: {ex.Message}");
             }
         }
     }
